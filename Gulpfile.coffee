@@ -23,13 +23,17 @@ gulp.task 'html', ->
   gulp.src('html/**/*.html')
     .pipe(gulp.dest('public'))
 
+gulp.task 'vendor', ->
+  gulp.src('vendor/**')
+    .pipe(gulp.dest('public'))
+
 gulp.task 'watch-client', ->
   livereload.listen()
   gulp.watch('sass/**', ['sass']).on 'change', livereload.changed
   gulp.watch('coffee/**', ['coffee']).on 'change', livereload.changed
   gulp.watch('html/**', ['html']).on 'change', livereload.changed
 
-gulp.task 'client', ['sass', 'coffee', 'html', 'watch-client'], ->
+gulp.task 'client', ['sass', 'coffee', 'html', 'vendor', 'watch-client'], ->
   gulp.src('public/index.html')
     .pipe(wait(2000))
     .pipe(open('http://localhost:3000', {app:"chromium"}))
