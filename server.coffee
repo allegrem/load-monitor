@@ -1,9 +1,11 @@
-app = require('express')()
+express = require('express')
+app = express()
 http = require('http').createServer(app)
 io = require('socket.io')(http)
 os = require 'os'
 
-app.get '/', (req, res) -> res.sendFile __dirname+'/index.html'
+
+app.use express.static(__dirname + '/public')
 
 io.on 'connection', (socket) ->
   console.log 'a user is connected'
