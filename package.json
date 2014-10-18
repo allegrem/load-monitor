@@ -1,0 +1,8 @@
+{
+  "name": "load-monitor",
+  "version": "0.0.1",
+  "description": "load monitoring web interface",
+  "dependencies": {
+    "express": "^4.9.8"
+  }
+}
