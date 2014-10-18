@@ -9,7 +9,7 @@ jaugesConfig = [
 ]
 
 socket = io()
+source = Rx.Observable.fromEvent socket, 'load'
 
-socket.on 'load', (load) ->
-  console.log "load", load
+source.subscribe (load) ->
   $(jauge.id).html jaugeTpl(title: jauge.title, value: load[jauge.index])  for jauge in jaugesConfig
