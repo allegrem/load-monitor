@@ -9,5 +9,7 @@
   "devDependencies": {
     "coffee-script": "~1.6.3",
     "gulp": "^3.8.8"
+    "gulp-open": "^0.3.0",
+    "gulp-wait": "0.0.2",
   }
 }
