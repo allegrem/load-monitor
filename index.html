@@ -14,14 +14,12 @@
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <h1>Load Average</h1>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+      socket.on('load', function(load) { console.log("load", load); })
     </script>
   </body>
 </html>
