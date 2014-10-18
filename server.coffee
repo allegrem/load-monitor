@@ -21,4 +21,4 @@ emitLoadAvg = (socket) ->
   console.log 'emit load', load
   dest.emit 'load', load
 
-setInterval emitLoadAvg, 10000
+setInterval emitLoadAvg, 5000
