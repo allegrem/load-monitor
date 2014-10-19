@@ -1,5 +1,6 @@
 @import "bourbon/bourbon";
+@import "base/base";
 
 body.overload {
-  background-color: red;
+  background-color: $light-red;
 }
