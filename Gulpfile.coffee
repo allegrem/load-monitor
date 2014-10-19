@@ -10,7 +10,7 @@ node = null
 
 
 gulp.task 'sass', ->
-  gulp.src('sass/**/*.sass')
+  gulp.src('sass/**/*.scss')
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
 
