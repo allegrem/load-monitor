@@ -20,9 +20,8 @@ loadSource = Rx.Observable.fromEvent socket, 'load'
 # Extract average load during the last 2 minutes
 averageLoadSource = loadSource
   .select (loads) -> loads[0] #extract the first value of the table
-  .bufferWithTime(25000, 5000) #buffer the values emitted during the last 25 seconds
-  .select (buffer) ->
-    buffer.reduce(((prev, curr) -> prev + curr), 0) / buffer.length  #compute the average value of the buffer
+  .windowWithTime(15000, 5000) #buffer the values emitted during the last 25 seconds
+  .selectMany (win) -> win.average() #compute the average load
 
 # Binary stream indicating if the server is overloaded (avg load > 1)
 overloadSource = averageLoadSource
