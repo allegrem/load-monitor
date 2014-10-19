@@ -54,6 +54,8 @@ overloadSource
 # Chart
 dateToLabel = (date) -> "#{date.getHours()}:#{date.getMinutes()}:#{date.getSeconds()}"
 ctx = $("#loadChart").get(0).getContext("2d")
+ctx.canvas.width = 0.9 * window.innerWidth
+ctx.canvas.height = 0.5 * window.innerHeight
 loadChartData =
   labels: ['','']
   datasets: [
