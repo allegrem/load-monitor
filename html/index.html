@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/app.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -20,8 +21,7 @@
 
         <canvas id="loadChart" width="800" height="400"></canvas>
 
-        <h2>Log</h2>
-        <ul id="log"></ul>
+        <div id="log"></div>
 
 
         <script id="gauge-template" type="text/x-handlebars-template">
@@ -34,11 +34,13 @@
         </script>
 
         <script id="log-entry-template" type="text/x-handlebars-template">
-            <li class="log-entry">
-                <i class="icon-{{level}}"></i>
-                <time>{{time}}</time>
-                <p>{{message}}</p>
-            </li>
+            <div class="log-entry {{level}}">
+                <i class="fa"></i>
+                <div class="log-entry-content">
+                    <p>{{message}}</p>
+                    <time>{{time}}</time>
+                </div>
+            </div>
         </script>
 
         <script src="/socket.io/socket.io.js"></script>

@@ -22,7 +22,7 @@ averageLoadSource = instantLoadSource
 
 # Binary stream indicating if the server is overloaded (avg load > 1)
 overloadSource = averageLoadSource
-  .select (load) -> load > 1 #turn the load stream into a binary stream (true if the avg load is greater than 1)
+  .select (load) -> load > 0.6 #turn the load stream into a binary stream (true if the avg load is greater than 1)
   .startWith(false) #at the beginning, there is no overload
   .distinctUntilChanged() #only keep the value when it changes
 
@@ -43,6 +43,7 @@ overloadSource.subscribe (overload) ->
 # Append log entries
 overloadSource
   .skip(1)  #we don't want to log the initial 'false' value
+  .startWith(true, false, true, false)  # REMOVE ME !!!!!!!!!
   .subscribe (overload) ->
     entry =
       time: new Date()
@@ -63,7 +64,7 @@ loadChartData =
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
-      data: [0,0]
+      data: [0.0001,0.0001]
     },
     {
       fillColor: "rgba(0,0,0,0)",
