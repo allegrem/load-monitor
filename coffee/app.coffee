@@ -26,3 +26,11 @@ loadSource.subscribe (load) ->
 averageLoadSource.subscribe (load) ->
   console.log "load", load
   $('#gaugeavg').html gaugeTpl(title: 'average last 2 minutes', value: load)
+
+# Update background color
+averageLoadSource
+  .select (load) -> load > 1
+  .startWith(false)
+  .distinctUntilChanged()
+  .subscribe (overload) ->
+    $('body').toggleClass 'overload', overload
