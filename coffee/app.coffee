@@ -71,17 +71,17 @@ loadChartData =
   labels: ['','']
   datasets: [
     {
-      fillColor: "rgba(220,220,220,0.2)",
-      strokeColor: "rgba(220,220,220,1)",
-      pointColor: "rgba(220,220,220,1)",
+      fillColor: "rgba(44,62,80,0.1)",
+      strokeColor: "rgba(44,62,80,1)",
+      pointColor: "rgba(44,62,80,1)",
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
-      pointHighlightStroke: "rgba(220,220,220,1)",
-      data: [0.0001,0.0001]
+      pointHighlightStroke: "rgba(44,62,80,1)",
+      data: [0.0001,0.0001]  #little hack: with 0, it does not display the grid :(
     },
     {
       fillColor: "rgba(0,0,0,0)",
-      strokeColor: "rgba(255,0,0,1)",
+      strokeColor: "rgba(231,76,60,1)",
       pointColor: "rgba(0,0,0,0)",
       pointStrokeColor: "rgba(0,0,0,0)",
       pointHighlightFill: "rgba(0,0,0,0)",
@@ -91,8 +91,8 @@ loadChartData =
   ]
 loadChartOpts =
   scaleBeginAtZero: true
-  showTooltips: false
+  scaleFontColor: '#999',
 loadChart = new Chart(ctx).Line loadChartData, loadChartOpts
 instantLoadSource.subscribe (load) ->
   loadChart.addData [load, 1], dateToLabel(new Date())
-  loadChart.removeData(0)  if loadChart.datasets[0].points.length > 12
+  loadChart.removeData(0)  if loadChart.datasets[0].points.length > 60

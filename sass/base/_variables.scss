@@ -27,7 +27,8 @@ $blue: #3498db;
 $red: #e74c3c;
 $green: #2ecc71;
 $orange: #e67e22;
-$dark-gray: #333;
+$white: #ecf0f1;
+$dark-gray: #2c3e50;
 $medium-gray: #999;
 $light-gray: #DDD;
 $light-red: #FBE3E4;
@@ -35,7 +36,7 @@ $light-yellow: #FFF6BF;
 $light-green: #E6EFC2;
 
 // Background Color
-$base-background-color: white;
+$base-background-color: $white;
 
 // Font Colors
 $base-font-color: $dark-gray;
