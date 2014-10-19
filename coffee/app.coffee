@@ -1,3 +1,5 @@
+#### Templates & Configuration
+
 # Pre compile gauge template
 gaugeTpl = Handlebars.compile $("#gauge-template").html()
 
@@ -7,6 +9,9 @@ gaugesConfig = [
   {title: 'last 5 minutes', id: '#gauge5min', index: 1},
   {title: 'last 15 minutes', id: '#gauge15min', index: 2}
 ]
+
+
+#### Streams
 
 # Connect with socket.io
 socket = io()
@@ -19,6 +24,15 @@ averageLoadSource = loadSource
   .select (buffer) ->
     buffer.reduce(((prev, curr) -> prev + curr), 0) / buffer.length  #compute the average value of the buffer
 
+# Binary stream indicating if the server is overloaded (avg load > 1)
+overloadSource = averageLoadSource
+  .select (load) -> load > 1 #turn the load stream into a binary stream (true if the avg load is greater than 1)
+  .startWith(false) #at the beginning, there is no overload
+  .distinctUntilChanged() #only keep the value when it changes
+
+
+#### View
+
 # Update gauges
 loadSource.subscribe (load) ->
   $(gauge.id).html gaugeTpl(title: gauge.title, value: load[gauge.index])  for gauge in gaugesConfig
@@ -28,9 +42,5 @@ averageLoadSource.subscribe (load) ->
   $('#gaugeavg').html gaugeTpl(title: 'average last 2 minutes', value: load)
 
 # Update background color
-averageLoadSource
-  .select (load) -> load > 1
-  .startWith(false)
-  .distinctUntilChanged()
-  .subscribe (overload) ->
+overloadSource.subscribe (overload) ->
     $('body').toggleClass 'overload', overload
