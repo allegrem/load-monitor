@@ -1,7 +1,8 @@
 #### Templates
 
-# Pre compile gauge template
-gaugeTpl = Handlebars.compile $("#gauge-template").html()
+# Pre compile templates
+gaugeTpl = Handlebars.compile $('#gauge-template').html()
+logEntryTpl = Handlebars.compile $('#log-entry-template').html()
 
 
 #### Streams
@@ -35,3 +36,13 @@ averageLoadSource.subscribe (load) ->
 # Update background color
 overloadSource.subscribe (overload) ->
   $('body').toggleClass 'overload', overload
+
+# Append log entries
+overloadSource
+  .skip(1)  #we don't want to log the initial 'false' value
+  .subscribe (overload) ->
+    entry =
+      time: new Date()
+      message: if overload then "High load alert!" else "High load alert recovered"
+      level: if overload then "alert" else "info"
+    $('#log').prepend logEntryTpl(entry)

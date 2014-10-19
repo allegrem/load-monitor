@@ -16,8 +16,10 @@
         <h1>Load Average</h1>
 
         <div id="gauges"></div>
-
         <div id="gaugeavg"></div>
+
+        <h2>Log</h2>
+        <ul id="log"></ul>
 
 
         <script id="gauge-template" type="text/x-handlebars-template">
@@ -27,6 +29,14 @@
                 <small>last {{timespan}} minutes</small>
             </div>
             {{/each}}
+        </script>
+
+        <script id="log-entry-template" type="text/x-handlebars-template">
+            <li class="log-entry">
+                <i class="icon-{{level}}"></i>
+                <time>{{time}}</time>
+                <p>{{message}}</p>
+            </li>
         </script>
 
         <script src="/socket.io/socket.io.js"></script>
