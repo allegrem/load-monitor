@@ -22,4 +22,4 @@ emitLoadAvg = (socket) ->
   console.log 'emit load', prettyLoad
   dest.emit 'load', prettyLoad
 
-setInterval emitLoadAvg, 5000
+setInterval emitLoadAvg, 10000

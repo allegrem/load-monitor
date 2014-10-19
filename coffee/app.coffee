@@ -32,12 +32,12 @@ instantLoadSource = loadsSource
 
 # Extract average load during the last 2 minutes
 averageLoadSource = instantLoadSource
-  .windowWithTime(15000, 5000) #buffer the values emitted during the last 25 seconds
+  .windowWithCount(12,1) #buffer the last 12 values (last 2 minutes)
   .selectMany (win) -> win.average() #compute the average load
 
 # Binary stream indicating if the server is overloaded (avg load > 1)
 overloadSource = averageLoadSource
-  .select (load) -> load > 0.6 #turn the load stream into a binary stream (true if the avg load is greater than 1)
+  .select (load) -> load > 1 #turn the load stream into a binary stream (true if the avg load is greater than 1)
   .startWith(false) #at the beginning, there is no overload
   .distinctUntilChanged() #only keep the value when it changes
 
@@ -55,7 +55,6 @@ overloadSource.subscribe (overload) ->
 # Append log entries
 overloadSource
   .skip(1)  #we don't want to log the initial 'false' value
-  .startWith(true, false, true, false)  # REMOVE ME !!!!!!!!!
   .subscribe (overload) ->
     entry =
       time: new Date()
