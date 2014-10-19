@@ -1,11 +1,11 @@
 // Typography
-$sans-serif: $helvetica;
+$sans-serif: 'Lato', $helvetica;
 $serif: $georgia;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
 
 // Font Sizes
-$base-font-size: 1em;
+$base-font-size: 1.2em;
 $h1-font-size: $base-font-size * 2.25;
 $h2-font-size: $base-font-size * 2;
 $h3-font-size: $base-font-size * 1.75;
@@ -26,6 +26,7 @@ $base-z-index: 0;
 $blue: #3498db;
 $red: #e74c3c;
 $green: #2ecc71;
+$orange: #e67e22;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;

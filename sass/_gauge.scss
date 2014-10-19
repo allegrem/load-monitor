@@ -1,0 +1,33 @@
+.gauge {
+  $gauge-size: 100px;
+
+  display: inline-block;
+  text-align: center;
+  margin-left: $gauge-size / 2;
+
+  strong {
+    width: $gauge-size;
+    height: $gauge-size;
+    display: block;
+    border: solid 20px $green;
+    border-radius: 100%;
+    line-height: $gauge-size;
+    font-size: $gauge-size * 0.4;
+    font-weight: normal;
+    color: $green;
+  }
+
+  &.warning strong {
+    border-color: $orange;
+    color: $orange;
+  }
+
+  &.alert strong {
+    border-color: $red;
+    color: $red;
+  }
+
+  small {
+    font-style: italic;
+  }
+}

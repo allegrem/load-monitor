@@ -4,6 +4,21 @@
 gaugeTpl = Handlebars.compile $('#gauge-template').html()
 logEntryTpl = Handlebars.compile $('#log-entry-template').html()
 
+# Keep two decimals
+Handlebars.registerHelper 'truncate', (value) -> value.toFixed(2)
+
+# Return the level (alert, warning, normal) corresponding to a value
+Handlebars.registerHelper 'valueToLevel', (value) ->
+  return 'alert' if value >= 1
+  return 'warning' if value >= 0.75
+  return 'normal'
+
+# Pluralize a word depending on a value
+# If plural is omitted, the plural form will be the singular form with an 's'
+Handlebars.registerHelper 'pluralize', (value, singular, plural) ->
+  plural = singular + 's'  if typeof(plural) isnt String
+  if value > 1 then plural else singular
+
 
 #### Streams
 
@@ -32,9 +47,6 @@ overloadSource = averageLoadSource
 # Update gauges
 loadsSource.subscribe (loads) ->
   $('#gauges').html gaugeTpl(loads: loads)
-
-averageLoadSource.subscribe (load) ->
-  $('#gaugeavg').html gaugeTpl(loads: [{timespan: 2, value: load}])
 
 # Update background color
 overloadSource.subscribe (overload) ->
