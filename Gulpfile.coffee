@@ -36,7 +36,7 @@ gulp.task 'watch-client', ->
 gulp.task 'client', ['sass', 'coffee', 'html', 'vendor', 'watch-client'], ->
   gulp.src('public/index.html')
     .pipe(wait(2000))
-    .pipe(open('http://localhost:3000', {app:"chromium"}))
+    .pipe(open('', url: 'http://localhost:3000'))
 
 
 gulp.task 'watch-server', ->
