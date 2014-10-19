@@ -15,18 +15,18 @@
 
         <h1>Load Average</h1>
 
-        <div id="gauge1min"></div>
-        <div id="gauge5min"></div>
-        <div id="gauge15min"></div>
+        <div id="gauges"></div>
 
         <div id="gaugeavg"></div>
 
 
         <script id="gauge-template" type="text/x-handlebars-template">
+            {{#each loads}}
             <div class="gauge">
                 <strong>{{value}}</strong>
-                <small>{{title}}</small>
+                <small>last {{timespan}} minutes</small>
             </div>
+            {{/each}}
         </script>
 
         <script src="/socket.io/socket.io.js"></script>
